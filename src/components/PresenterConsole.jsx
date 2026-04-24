@@ -81,6 +81,15 @@ const PresenterConsole = () => {
     set(ref(db, 'presentation/state'), newState);
   };
 
+  const setAnnuitySubTab = (subId) => {
+    const newState = {
+      ...sessionState,
+      annuitySubTab: subId
+    };
+    setSessionState(newState);
+    set(ref(db, 'presentation/state'), newState);
+  };
+
   const resetSession = () => {
     if (window.confirm("Reset entire session? All attendee phones will return to the poll.")) {
       set(ref(db, 'presentation'), {
@@ -197,6 +206,38 @@ const PresenterConsole = () => {
                   {isActive ? <Eye size={16} /> : <EyeOff size={16} />}
                 </button>
               </div>
+
+              {/* Special Controls for Annuities */}
+              {isActive && mod.id === 'annuity' && (
+                <div style={{ 
+                  gridColumn: '1 / -1', 
+                  marginTop: '10px', 
+                  padding: '10px', 
+                  background: 'white', 
+                  borderRadius: '6px',
+                  display: 'flex',
+                  gap: '5px',
+                  flexWrap: 'wrap'
+                }}>
+                  {['fixed', 'fia', 'rila', 'spia'].map(sub => (
+                    <button
+                      key={sub}
+                      onClick={() => setAnnuitySubTab(sub)}
+                      style={{
+                        padding: '4px 8px',
+                        fontSize: '0.7rem',
+                        borderRadius: '4px',
+                        border: `1px solid ${sessionState.annuitySubTab === sub ? 'var(--color-gold-primary)' : '#eee'}`,
+                        background: sessionState.annuitySubTab === sub ? 'var(--color-gold-primary)' : 'none',
+                        color: sessionState.annuitySubTab === sub ? 'white' : 'inherit',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {sub.toUpperCase()}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           );
         })}

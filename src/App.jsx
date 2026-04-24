@@ -167,7 +167,7 @@ function App() {
               {activeTab === 'hype' && <HypeSimulator />}
               {activeTab === 'credit' && <CreditSlider />}
               {activeTab === 'retirement' && <RetirementClock />}
-              {activeTab === 'annuity' && <AnnuityTool />}
+              {activeTab === 'annuity' && <AnnuityTool remoteState={remoteState} />}
               {activeTab === 'insurance' && <InsuranceTool />}
             </motion.div>
           ) : currentView === 'closing' ? (

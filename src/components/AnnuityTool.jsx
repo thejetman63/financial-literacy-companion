@@ -37,9 +37,12 @@ const annuityTypes = [
   },
 ];
 
-const AnnuityTool = () => {
-  const [selectedType, setSelectedType] = useState(annuityTypes[1]); // Default to FIA
+const AnnuityTool = ({ remoteState }) => {
   const [amount, setAmount] = useState(100000);
+  
+  // Use remote state if available, otherwise fallback to local FIA
+  const activeId = remoteState?.annuitySubTab || 'fia';
+  const selectedType = annuityTypes.find(t => t.id === activeId) || annuityTypes[1];
 
   return (
     <div className="glass-card" style={{ padding: '24px', marginTop: '20px' }}>
@@ -52,27 +55,7 @@ const AnnuityTool = () => {
         Annuities aren't just for retirement income; they are powerful tools for <strong>protected accumulation</strong>.
       </p>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', marginBottom: '25px' }}>
-        {annuityTypes.map((type) => (
-          <button
-            key={type.id}
-            onClick={() => setSelectedType(type)}
-            style={{
-              padding: '12px 8px',
-              borderRadius: '8px',
-              border: `2px solid ${selectedType.id === type.id ? 'var(--color-gold-primary)' : 'rgba(0,0,0,0.05)'}`,
-              background: selectedType.id === type.id ? 'var(--color-gold-primary)10' : 'white',
-              textAlign: 'center',
-              cursor: 'pointer',
-              fontSize: '0.8rem',
-              fontWeight: 'bold',
-              transition: 'all 0.2s'
-            }}
-          >
-            {type.label}
-          </button>
-        ))}
-      </div>
+      {/* Sub-tabs removed for audience - Presenter controls this via live sync */}
 
       <AnimatePresence mode="wait">
         <motion.div
