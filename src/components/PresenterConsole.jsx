@@ -42,10 +42,11 @@ const PresenterConsole = () => {
   const totalVotes = Object.values(votes).reduce((a, b) => a + b, 0);
 
   const toggleModule = (id) => {
-    const isUnlocked = sessionState.unlockedModules.includes(id);
+    const unlocked = sessionState.unlockedModules || [];
+    const isUnlocked = unlocked.includes(id);
     const newUnlocked = isUnlocked 
-      ? sessionState.unlockedModules.filter(m => m !== id)
-      : [...sessionState.unlockedModules, id];
+      ? unlocked.filter(m => m !== id)
+      : [...unlocked, id];
     
     const newState = {
       ...sessionState,
@@ -61,10 +62,11 @@ const PresenterConsole = () => {
   };
 
   const setActiveModule = (id) => {
-    const isUnlocked = sessionState.unlockedModules.includes(id);
+    const unlocked = sessionState.unlockedModules || [];
+    const isUnlocked = unlocked.includes(id);
     const newUnlocked = isUnlocked 
-      ? sessionState.unlockedModules 
-      : [...sessionState.unlockedModules, id];
+      ? unlocked 
+      : [...unlocked, id];
 
     const newState = {
       ...sessionState,
@@ -138,7 +140,8 @@ const PresenterConsole = () => {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {modules.map((mod) => {
-          const isUnlocked = sessionState.unlockedModules.includes(mod.id);
+          const unlocked = sessionState.unlockedModules || [];
+          const isUnlocked = unlocked.includes(mod.id);
           const isActive = sessionState.activeModule === mod.id;
 
           return (
@@ -203,6 +206,28 @@ const PresenterConsole = () => {
         <strong>Current Live Signal:</strong><br/>
         {sessionState.activeModule === 'none' ? 'Waiting to start...' : `Audience is viewing: ${modules.find(m => m.id === sessionState.activeModule)?.label}`}
       </div>
+
+      <button 
+        onClick={resetSession}
+        style={{
+          marginTop: '20px',
+          width: '100%',
+          padding: '12px',
+          background: 'none',
+          border: '1px solid #ffcdd2',
+          color: '#d32f2f',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '10px',
+          fontSize: '0.9rem',
+          fontWeight: 'bold'
+        }}
+      >
+        <RefreshCw size={18} /> Reset All Data (Emergency)
+      </button>
       </div>
     </div>
   );
