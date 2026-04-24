@@ -33,7 +33,7 @@ function App() {
     unlockedModules: []
   });
 
-  const isAdmin = new URLSearchParams(window.location.search).get('admin') === '1';
+  const isAdmin = window.location.search.includes('admin=1') || window.location.search.includes('admin-1');
 
   useEffect(() => {
     const stateRef = ref(db, 'presentation/state');
