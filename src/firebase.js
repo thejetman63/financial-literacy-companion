@@ -3,13 +3,14 @@ import { getDatabase, ref, onValue, set } from "firebase/database";
 
 // REPLACE THIS WITH YOUR FIREBASE CONFIG FROM THE CONSOLE
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyB60oVT9PauMuMEBgEVa787zAucM9T3XKo",
+  authDomain: "financial-literacy-e26e7.firebaseapp.com",
+  databaseURL: "https://financial-literacy-e26e7-default-rtdb.firebaseio.com",
+  projectId: "financial-literacy-e26e7",
+  storageBucket: "financial-literacy-e26e7.firebasestorage.app",
+  messagingSenderId: "670711696500",
+  appId: "1:670711696500:web:fb25c7014f5dfd0d131521",
+  measurementId: "G-NV82FW5LDF"
 };
 
 let app;
