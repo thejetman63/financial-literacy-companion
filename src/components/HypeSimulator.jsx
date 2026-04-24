@@ -31,17 +31,25 @@ const HypeSimulator = () => {
 
         let newValue;
         if (mode === 'market') {
-          // Steady growth: ~0.5% per "day" (exaggerated for demo)
-          newValue = lastValue * (1 + (Math.random() * 0.02 - 0.005));
+          // Steady growth: ~0.3% - 0.7% per "day" (exaggerated for demo)
+          // Always positive or slightly negative, but trends upward reliably
+          newValue = lastValue * (1 + (Math.random() * 0.015 - 0.003));
         } else {
-          // Meme Stock: Wild swings
-          if (lastDay < 15) {
-            // The Pump: Rapid rise
-            newValue = lastValue * (1 + (Math.random() * 0.4));
+          // Meme Stock: High-speed Pump and sharp Dump
+          if (lastDay < 10) {
+            // Stage 1: The "To the Moon" Pump (Days 0-9)
+            newValue = lastValue * (1 + (Math.random() * 0.35));
+          } else if (lastDay < 15) {
+            // Stage 2: The Peak Wobble (Days 10-14)
+            newValue = lastValue * (1 + (Math.random() * 0.2 - 0.15));
           } else {
-            // The Dump: Sharp fall
-            newValue = lastValue * (1 - (Math.random() * 0.3));
+            // Stage 3: The Gravity Dump (Days 15-30)
+            // Harsh drops of up to 45% daily
+            newValue = lastValue * (1 - (Math.random() * 0.45));
           }
+          
+          // Ensure it doesn't stay at 0 exactly, but can get very low
+          if (newValue < 1) newValue = 1;
         }
 
         return [...currentData, { day: lastDay + 1, value: newValue }];
@@ -111,8 +119,8 @@ const HypeSimulator = () => {
                   Steady growth wins. Your $1,000 grew to ${result.toLocaleString(undefined, { maximumFractionDigits: 0 })}.
                 </div>
               ) : (
-                <div style={{ color: '#2e7d32', marginBottom: '15px' }}>
-                  You got lucky! But can you do it twice?
+                <div style={{ color: '#F59E0B', marginBottom: '15px' }}>
+                  <strong>Pure Luck.</strong> You caught the wave, but 90% of people got crushed. Can you risk doing it again?
                 </div>
               )}
               <button className="btn-primary" onClick={() => setMode(null)} style={{ width: '100%' }}>
