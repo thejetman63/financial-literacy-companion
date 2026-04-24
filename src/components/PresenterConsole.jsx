@@ -61,11 +61,22 @@ const PresenterConsole = () => {
   };
 
   const setActiveModule = (id) => {
-    // Update local state immediately for Demo Mode
-    setSessionState(prev => ({ ...prev, activeModule: id }));
+    const isUnlocked = sessionState.unlockedModules.includes(id);
+    const newUnlocked = isUnlocked 
+      ? sessionState.unlockedModules 
+      : [...sessionState.unlockedModules, id];
 
-    // Attempt to sync to Firebase
-    set(ref(db, 'presentation/state/activeModule'), id);
+    const newState = {
+      ...sessionState,
+      unlockedModules: newUnlocked,
+      activeModule: id
+    };
+
+    // Update local state immediately
+    setSessionState(newState);
+
+    // Sync to Firebase
+    set(ref(db, 'presentation/state'), newState);
   };
 
   const resetSession = () => {
@@ -170,15 +181,14 @@ const PresenterConsole = () => {
                 
                 <button
                   onClick={() => setActiveModule(mod.id)}
-                  disabled={!isUnlocked}
                   style={{
                     background: isActive ? 'var(--color-brown-primary)' : 'none',
                     color: isActive ? 'white' : 'var(--color-text-muted)',
                     border: isActive ? 'none' : '1px solid rgba(0,0,0,0.1)',
                     padding: '8px 12px',
                     borderRadius: '6px',
-                    cursor: isUnlocked ? 'pointer' : 'not-allowed',
-                    opacity: isUnlocked ? 1 : 0.5
+                    cursor: 'pointer',
+                    opacity: 1
                   }}
                 >
                   {isActive ? <Eye size={16} /> : <EyeOff size={16} />}
