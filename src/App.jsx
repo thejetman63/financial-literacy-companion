@@ -146,7 +146,8 @@ function App() {
 
               <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', overflowX: 'auto', paddingBottom: '5px' }}>
                 {['hype', 'credit', 'retirement', 'annuity', 'insurance'].map((tabId) => {
-                  const isUnlocked = remoteState.unlockedModules.includes(tabId);
+                  const unlocked = remoteState.unlockedModules || [];
+                  const isUnlocked = unlocked.includes(tabId);
                   const labels = { hype: 'Meme vs Market', credit: 'Credit Impact', retirement: 'Time is Money', annuity: 'Deferred Annuities', insurance: 'Protection Asset' };
                   
                   return (
