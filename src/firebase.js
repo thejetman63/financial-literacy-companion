@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, set } from "firebase/database";
+import { getDatabase, ref, onValue, set, increment, update } from "firebase/database";
 
 // REPLACE THIS WITH YOUR FIREBASE CONFIG FROM THE CONSOLE
 const firebaseConfig = {
@@ -51,4 +51,4 @@ const safeSet = (reference, value) => {
   } catch (e) { return Promise.resolve(); }
 };
 
-export { db, safeRef as ref, safeOnValue as onValue, safeSet as set };
+export { db, safeRef as ref, safeOnValue as onValue, safeSet as set, increment, update };

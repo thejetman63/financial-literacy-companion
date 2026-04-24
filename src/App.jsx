@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CreditCard, TrendingUp, ShieldCheck, Landmark, PiggyBank, Zap, BarChart3, ChevronRight, Home, Lock } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { db, ref, onValue } from './firebase';
+import { db, ref, onValue, set, increment, update } from './firebase';
 
 import HypeSimulator from './components/HypeSimulator';
 import CreditSlider from './components/CreditSlider';
@@ -59,12 +59,10 @@ function App() {
     setSelectedTopic(id);
     setHasVoted(true);
     
-    // Sync vote to Firebase
-    const voteRef = ref(db, `presentation/votes/${id}`);
-    onValue(voteRef, (snapshot) => {
-      const currentCount = snapshot.val() || 0;
-      set(ref(db, `presentation/votes/${id}`), currentCount + 1);
-    }, { onlyOnce: true });
+    // Sync vote to Firebase using atomic increment
+    const updates = {};
+    updates[`presentation/votes/${id}`] = increment(1);
+    update(ref(db, '/'), updates);
 
     confetti({
       particleCount: 100,
