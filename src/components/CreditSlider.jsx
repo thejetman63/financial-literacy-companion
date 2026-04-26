@@ -1,104 +1,133 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CreditCard, AlertCircle, TrendingDown, DollarSign } from 'lucide-react';
-
-const events = [
-  { id: 'perfect', label: 'Perfect History', impact: 0, color: '#2e7d32', description: 'No missed payments, low utilization.' },
-  { id: 'late', label: '30-Day Late Payment', impact: -80, color: '#d32f2f', description: 'A single missed credit card or loan payment.' },
-  { id: 'maxed', label: 'Maxed Out Card', impact: -45, color: '#f57c00', description: 'Using 90%+ of your available credit limit.' },
-  { id: 'new', label: '3 New Accounts', impact: -25, color: '#1976d2', description: 'Opening multiple store cards or loans quickly.' },
-];
+import { CreditCard, ShieldCheck, TrendingUp, DollarSign, Info } from 'lucide-react';
 
 const CreditSlider = () => {
-  const [selectedEvent, setSelectedEvent] = useState(events[0]);
-  const baseScore = 780;
-  const currentScore = baseScore + selectedEvent.impact;
+  const [utilization, setUtilization] = useState(15); // Percentage
+  const [age, setAge] = useState(7); // Years
+  const [inquiries, setInquiries] = useState(1); // Count
 
-  // Rough estimation of interest rate impact
-  const getInterestRate = (score) => {
-    if (score >= 760) return 6.5;
-    if (score >= 700) return 7.2;
-    if (score >= 640) return 8.5;
-    return 10.5;
-  };
-
-  const rate = getInterestRate(currentScore);
-  const baseRate = getInterestRate(780);
+  // Asset-based scoring logic
+  // Utilization: Lower is better, but >0 is good. 30% of score.
+  // Age: Longer is better. 15% of score.
+  // Inquiries: 1-2 is fine. 10% of score.
+  // Payment History (Assumed perfect for this "Asset" view)
   
-  // Calculate monthly payment on a $400,000 mortgage (30yr fixed)
-  const calculatePayment = (r) => {
-    const p = 400000;
-    const monthlyRate = (r / 100) / 12;
-    const n = 360;
-    return (p * monthlyRate * Math.pow(1 + monthlyRate, n)) / (Math.pow(1 + monthlyRate, n) - 1);
+  const calculateScore = () => {
+    let score = 650; // Starting strong base
+    
+    // Utilization Impact (up to +100 points)
+    if (utilization <= 10) score += 100;
+    else if (utilization <= 30) score += 70;
+    else if (utilization <= 50) score += 30;
+    else if (utilization <= 80) score -= 20;
+    else score -= 60;
+
+    // Age Impact (up to +70 points)
+    score += Math.min(age * 10, 70);
+
+    // Inquiry Impact (Misunderstood)
+    // 0-2 inquiries: No penalty (Normal behavior)
+    // 3-5 inquiries: Minor dip
+    if (inquiries > 2 && inquiries <= 5) score -= 15;
+    else if (inquiries > 5) score -= 40;
+    
+    return Math.min(Math.max(score, 350), 850);
   };
 
-  const monthlyPayment = calculatePayment(rate);
-  const basePayment = calculatePayment(baseRate);
-  const monthlyDifference = monthlyPayment - basePayment;
+  const currentScore = calculateScore();
+
+  const getAssetStatus = (score) => {
+    if (score >= 800) return { label: 'Elite Asset', color: '#D4AF37', desc: 'Maximum leverage. Lowest cost of capital.' };
+    if (score >= 740) return { label: 'Strong Asset', color: '#2e7d32', desc: 'Highly efficient. Most doors are open.' };
+    if (score >= 670) return { label: 'Solid Core', color: '#1976d2', desc: 'Good standing. Useful for standard leverage.' };
+    return { label: 'Rebuilding Phase', color: '#d32f2f', desc: 'Cost of capital is currently high.' };
+  };
+
+  const status = getAssetStatus(currentScore);
 
   return (
     <div className="glass-card" style={{ padding: '24px', marginTop: '20px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-        <CreditCard size={24} color="var(--color-gold-primary)" />
-        <h3 style={{ margin: 0 }}>Credit Impact Simulator</h3>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '25px' }}>
+        <TrendingUp size={24} color="var(--color-gold-primary)" />
+        <h3 style={{ margin: 0 }}>Credit as a Strategic Asset</h3>
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-        <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>Estimated Score</div>
+        <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--color-text-muted)', letterSpacing: '1px' }}>Borrowing Power Score</div>
         <motion.div 
           key={currentScore}
-          initial={{ scale: 0.8, opacity: 0 }}
+          initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          style={{ fontSize: '3.5rem', fontWeight: 'bold', color: selectedEvent.color }}
+          style={{ fontSize: '4rem', fontWeight: 'bold', color: status.color, lineHeight: 1 }}
         >
           {currentScore}
         </motion.div>
+        <div style={{ marginTop: '5px', fontWeight: 'bold', color: status.color, textTransform: 'uppercase', fontSize: '0.9rem' }}>
+          {status.label}
+        </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '30px' }}>
-        {events.map((event) => (
-          <button
-            key={event.id}
-            onClick={() => setSelectedEvent(event)}
-            style={{
-              padding: '12px',
-              borderRadius: '8px',
-              border: `2px solid ${selectedEvent.id === event.id ? event.color : 'rgba(0,0,0,0.05)'}`,
-              background: selectedEvent.id === event.id ? `${event.color}10` : 'white',
-              textAlign: 'left',
-              cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}
-          >
-            <div style={{ fontWeight: 'bold', color: event.color }}>{event.label}</div>
-            <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>{event.description}</div>
-          </button>
-        ))}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', marginBottom: '35px' }}>
+        {/* Utilization Slider */}
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+            <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Credit Utilization</span>
+            <span style={{ color: utilization <= 30 ? '#2e7d32' : '#d32f2f', fontWeight: 'bold' }}>{utilization}%</span>
+          </div>
+          <input 
+            type="range" min="0" max="100" value={utilization}
+            onChange={(e) => setUtilization(parseInt(e.target.value))}
+            style={{ width: '100%', accentColor: 'var(--color-gold-primary)' }}
+          />
+          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '5px' }}>
+            {utilization <= 30 ? 'High strategic value. Low risk profile.' : 'Capital is tight. Utilization is dragging score.'}
+          </div>
+        </div>
+
+        {/* Age Slider */}
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+            <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Average Account Age</span>
+            <span style={{ color: 'var(--color-brown-primary)', fontWeight: 'bold' }}>{age} Years</span>
+          </div>
+          <input 
+            type="range" min="0" max="25" value={age}
+            onChange={(e) => setAge(parseInt(e.target.value))}
+            style={{ width: '100%', accentColor: 'var(--color-brown-primary)' }}
+          />
+          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '5px' }}>
+            Your "Anchor." Longer history builds institutional trust.
+          </div>
+        </div>
+
+        {/* Inquiries Slider */}
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+            <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Recent Inquiries</span>
+            <span style={{ color: inquiries <= 2 ? '#2e7d32' : '#f57c00', fontWeight: 'bold' }}>{inquiries}</span>
+          </div>
+          <input 
+            type="range" min="0" max="12" value={inquiries}
+            onChange={(e) => setInquiries(parseInt(e.target.value))}
+            style={{ width: '100%', accentColor: 'var(--color-gold-primary)' }}
+          />
+          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '5px', display: 'flex', gap: '5px' }}>
+            <Info size={14} style={{ flexShrink: 0 }} />
+            <span>{inquiries <= 3 ? "Normal activity. Shopping for best rates is healthy." : "Elevated activity. Lenders may see caution flags."}</span>
+          </div>
+        </div>
       </div>
 
-      {selectedEvent.impact < 0 && (
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          style={{ background: 'rgba(211, 47, 47, 0.05)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(211, 47, 47, 0.1)' }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#d32f2f', fontWeight: 'bold', marginBottom: '10px' }}>
-            <TrendingDown size={18} />
-            The Financial Penalty
-          </div>
-          <p style={{ fontSize: '0.9rem', marginBottom: '10px' }}>
-            On a $400k home, your mortgage interest rate would jump from <strong>{baseRate}%</strong> to <strong>{rate}%</strong>.
-          </p>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.85rem' }}>Extra Monthly Cost:</span>
-            <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#d32f2f' }}>+${Math.round(monthlyDifference).toLocaleString()}</span>
-          </div>
-          <div style={{ fontSize: '0.75rem', marginTop: '5px', textAlign: 'right', color: 'var(--color-text-muted)' }}>
-            That's <strong>${Math.round(monthlyDifference * 360).toLocaleString()}</strong> over the life of the loan.
-          </div>
-        </motion.div>
-      )}
+      <div style={{ background: '#f9f9f9', padding: '15px', borderRadius: '12px', borderLeft: '4px solid var(--color-gold-primary)' }}>
+        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <ShieldCheck size={18} color="var(--color-gold-primary)" />
+          The Strategy
+        </div>
+        <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.5 }}>
+          Your credit score isn't a grade—it's the <strong>price of admission</strong> to low-cost capital. High scores allow you to use "Other People's Money" to build your own wealth.
+        </p>
+      </div>
     </div>
   );
 };
