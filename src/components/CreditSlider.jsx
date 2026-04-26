@@ -119,13 +119,23 @@ const CreditSlider = () => {
         </div>
       </div>
 
-      <div style={{ background: '#f9f9f9', padding: '15px', borderRadius: '12px', borderLeft: '4px solid var(--color-gold-primary)' }}>
+      <div style={{ background: '#f9f9f9', padding: '15px', borderRadius: '12px', borderLeft: '4px solid var(--color-gold-primary)', marginBottom: '15px' }}>
         <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <ShieldCheck size={18} color="var(--color-gold-primary)" />
           The Strategy
         </div>
         <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.5 }}>
           Your credit score isn't a grade—it's the <strong>price of admission</strong> to low-cost capital. High scores allow you to use "Other People's Money" to build your own wealth.
+        </p>
+      </div>
+
+      <div style={{ background: 'rgba(25, 118, 210, 0.05)', padding: '15px', borderRadius: '12px', border: '1px solid rgba(25, 118, 210, 0.1)' }}>
+        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '5px', color: '#1976d2', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Info size={18} />
+          Myth Buster: The Rate Shopping Rule
+        </div>
+        <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.5 }}>
+          Shopping for a mortgage or auto loan? FICO counts multiple inquiries of the same type within a <strong>14-45 day window</strong> as a <strong>single inquiry</strong>. You can shop for the best rate without damaging your asset.
         </p>
       </div>
     </div>
