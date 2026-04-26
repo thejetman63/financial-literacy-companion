@@ -7,8 +7,7 @@ import { db, ref, onValue, set, increment, update } from './firebase';
 import HypeSimulator from './components/HypeSimulator';
 import CreditSlider from './components/CreditSlider';
 import RetirementClock from './components/RetirementClock';
-import AnnuityTool from './components/AnnuityTool';
-import InsuranceTool from './components/InsuranceTool';
+import StrategyModule from './components/StrategyModule';
 import ContactCard from './components/ContactCard';
 import PresenterConsole from './components/PresenterConsole';
 
@@ -17,8 +16,7 @@ const topics = [
   { id: 'retirement', title: 'Retirement Planning', icon: <PiggyBank size={24} />, description: 'Making time your greatest ally.' },
   { id: 'investing', title: 'Investing Basics', icon: <TrendingUp size={24} />, description: 'Putting your money to work.' },
   { id: 'memes', title: 'Friends, Memes & Hype', icon: <Zap size={24} />, description: 'Navigating the noise of modern finance.' },
-  { id: 'annuities', title: 'Deferred Annuities', icon: <Landmark size={24} />, description: 'Protected growth and guaranteed future income.' },
-  { id: 'insurance', title: 'Life Insurance as an Asset', icon: <ShieldCheck size={24} />, description: 'Protection that builds wealth.' },
+  { id: 'protection', title: 'Protection & Growth', icon: <ShieldCheck size={24} />, description: 'Annuities & Insurance: The foundation of a secure plan.' },
 ];
 
 function App() {
@@ -145,10 +143,10 @@ function App() {
               </div>
 
               <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', overflowX: 'auto', paddingBottom: '5px' }}>
-                {['hype', 'credit', 'retirement', 'annuity', 'insurance'].map((tabId) => {
+                {['hype', 'credit', 'retirement', 'protection'].map((tabId) => {
                   const unlocked = remoteState.unlockedModules || [];
                   const isUnlocked = unlocked.includes(tabId);
-                  const labels = { hype: 'Meme vs Market', credit: 'Credit Impact', retirement: 'Time is Money', annuity: 'Deferred Annuities', insurance: 'Protection Asset' };
+                  const labels = { hype: 'Meme vs Market', credit: 'Credit Impact', retirement: 'Time is Money', protection: 'Protection & Growth' };
                   
                   return (
                     <button 
@@ -167,8 +165,7 @@ function App() {
               {activeTab === 'hype' && <HypeSimulator />}
               {activeTab === 'credit' && <CreditSlider />}
               {activeTab === 'retirement' && <RetirementClock />}
-              {activeTab === 'annuity' && <AnnuityTool remoteState={remoteState} />}
-              {activeTab === 'insurance' && <InsuranceTool />}
+              {activeTab === 'protection' && <StrategyModule remoteState={remoteState} />}
             </motion.div>
           ) : currentView === 'closing' ? (
             <motion.div

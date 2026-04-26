@@ -7,8 +7,7 @@ const modules = [
   { id: 'hype', label: 'Meme vs Market' },
   { id: 'credit', label: 'Credit Impact' },
   { id: 'retirement', label: 'Time is Money' },
-  { id: 'annuity', label: 'Deferred Annuities' },
-  { id: 'insurance', label: 'Protection Asset' },
+  { id: 'protection', label: 'Protection & Growth' },
   { id: 'closing', label: 'Final Summary & Contact' }
 ];
 
@@ -81,10 +80,10 @@ const PresenterConsole = () => {
     set(ref(db, 'presentation/state'), newState);
   };
 
-  const setAnnuitySubTab = (subId) => {
+  const setStrategySubTab = (subId) => {
     const newState = {
       ...sessionState,
-      annuitySubTab: subId
+      strategySubTab: subId
     };
     setSessionState(newState);
     set(ref(db, 'presentation/state'), newState);
@@ -207,8 +206,8 @@ const PresenterConsole = () => {
                 </button>
               </div>
 
-              {/* Special Controls for Annuities */}
-              {isActive && mod.id === 'annuity' && (
+              {/* Special Controls for Protection & Growth */}
+              {isActive && mod.id === 'protection' && (
                 <div style={{ 
                   gridColumn: '1 / -1', 
                   marginTop: '10px', 
@@ -216,24 +215,28 @@ const PresenterConsole = () => {
                   background: 'white', 
                   borderRadius: '6px',
                   display: 'flex',
-                  gap: '5px',
-                  flexWrap: 'wrap'
+                  gap: '5px'
                 }}>
-                  {['fixed', 'fia', 'rila', 'spia'].map(sub => (
+                  {[
+                    { id: 'annuities', label: 'Annuities' },
+                    { id: 'insurance', label: 'Life Insurance' }
+                  ].map(sub => (
                     <button
-                      key={sub}
-                      onClick={() => setAnnuitySubTab(sub)}
+                      key={sub.id}
+                      onClick={() => setStrategySubTab(sub.id)}
                       style={{
-                        padding: '4px 8px',
-                        fontSize: '0.7rem',
+                        flex: 1,
+                        padding: '6px',
+                        fontSize: '0.75rem',
                         borderRadius: '4px',
-                        border: `1px solid ${sessionState.annuitySubTab === sub ? 'var(--color-gold-primary)' : '#eee'}`,
-                        background: sessionState.annuitySubTab === sub ? 'var(--color-gold-primary)' : 'none',
-                        color: sessionState.annuitySubTab === sub ? 'white' : 'inherit',
-                        cursor: 'pointer'
+                        border: `1px solid ${sessionState.strategySubTab === sub.id ? 'var(--color-gold-primary)' : '#eee'}`,
+                        background: sessionState.strategySubTab === sub.id ? 'var(--color-gold-primary)' : 'none',
+                        color: sessionState.strategySubTab === sub.id ? 'white' : 'inherit',
+                        cursor: 'pointer',
+                        fontWeight: 'bold'
                       }}
                     >
-                      {sub.toUpperCase()}
+                      {sub.label}
                     </button>
                   ))}
                 </div>
