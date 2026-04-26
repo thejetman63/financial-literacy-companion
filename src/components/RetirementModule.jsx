@@ -55,10 +55,20 @@ const RetirementModule = () => {
         ))}
       </div>
 
-      <div style={{ marginTop: '25px', padding: '15px', background: '#f9f9f9', borderRadius: '8px', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+      <div style={{ marginTop: '25px', padding: '15px', background: '#f9f9f9', borderRadius: '8px', display: 'flex', gap: '10px', alignItems: 'flex-start', marginBottom: '15px' }}>
         <HelpCircle size={18} color="var(--color-gold-primary)" style={{ flexShrink: 0 }} />
         <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
           <strong>Pro Tip:</strong> Most people need a mix of both. Diversifying your <em>tax</em> buckets is as important as diversifying your assets.
+        </p>
+      </div>
+
+      <div style={{ background: 'rgba(25, 118, 210, 0.05)', padding: '15px', borderRadius: '12px', border: '1px solid rgba(25, 118, 210, 0.1)' }}>
+        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '5px', color: '#1976d2', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <TrendingUp size={18} />
+          Myth Buster: "I'll be in a lower bracket"
+        </div>
+        <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.5 }}>
+          Between Social Security being taxed, RMDs, and the loss of mortgage deductions, many retirees stay in the same or even higher tax bracket. Don't wait for a lower bracket that may never come.
         </p>
       </div>
     </div>

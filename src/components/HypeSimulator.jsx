@@ -130,6 +130,15 @@ const HypeSimulator = () => {
           )}
         </div>
       )}
+      <div style={{ marginTop: '20px', background: 'rgba(25, 118, 210, 0.05)', padding: '15px', borderRadius: '12px', border: '1px solid rgba(25, 118, 210, 0.1)' }}>
+        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '5px', color: '#1976d2', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <TrendingUp size={18} />
+          Myth Buster: The "Big Score" Trap
+        </div>
+        <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.5 }}>
+          You don't need a "moonshot" to get rich. A steady 8% return doubles your wealth every 9 years. Consistency is the real superpower, not catching the next viral trend.
+        </p>
+      </div>
     </div>
   );
 };

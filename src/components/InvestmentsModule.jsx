@@ -59,8 +59,18 @@ const InvestmentsModule = () => {
         ))}
       </div>
 
-      <div style={{ marginTop: '20px', padding: '15px', background: 'var(--color-brown-primary)', color: 'white', borderRadius: '8px', textAlign: 'center', fontSize: '0.85rem' }}>
+      <div style={{ marginTop: '20px', padding: '15px', background: 'var(--color-brown-primary)', color: 'white', borderRadius: '8px', textAlign: 'center', fontSize: '0.85rem', marginBottom: '15px' }}>
         The key is finding the right <strong>mix</strong> for your specific timeline.
+      </div>
+
+      <div style={{ background: 'rgba(25, 118, 210, 0.05)', padding: '15px', borderRadius: '12px', border: '1px solid rgba(25, 118, 210, 0.1)' }}>
+        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '5px', color: '#1976d2', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <TrendingUp size={18} />
+          Myth Buster: "Investing is Gambling"
+        </div>
+        <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.5 }}>
+          Gambling is a "negative sum" game where the house wins. Investing is a "positive sum" game based on corporate earnings and global productivity. Historically, the house (the market) has grown over time.
+        </p>
       </div>
     </div>
   );

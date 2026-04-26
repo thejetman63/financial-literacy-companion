@@ -79,9 +79,19 @@ const StrategyModule = ({ remoteState }) => {
         )}
       </AnimatePresence>
 
-      <div style={{ marginTop: '20px', fontSize: '0.7rem', color: 'var(--color-text-muted)', textAlign: 'center', borderTop: '1px solid rgba(0,0,0,0.05)', paddingTop: '15px' }}>
+      <div style={{ marginTop: '20px', fontSize: '0.7rem', color: 'var(--color-text-muted)', textAlign: 'center', borderTop: '1px solid rgba(0,0,0,0.05)', paddingTop: '15px', marginBottom: '15px' }}>
         Strategies are customized based on individual goals and risk tolerance. 
         Guarantees are subject to the claims-paying ability of the insurer.
+      </div>
+
+      <div style={{ background: 'rgba(25, 118, 210, 0.05)', padding: '15px', borderRadius: '12px', border: '1px solid rgba(25, 118, 210, 0.1)' }}>
+        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '5px', color: '#1976d2', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <ShieldCheck size={18} />
+          Myth Buster: "Insurance is for when I die"
+        </div>
+        <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.5 }}>
+          Modern policies are "Swiss Army Knives." Living benefits allow you to access the death benefit for chronic illness or pull out cash value as a private, tax-free retirement bank.
+        </p>
       </div>
     </div>
   );
