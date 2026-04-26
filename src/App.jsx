@@ -8,15 +8,16 @@ import HypeSimulator from './components/HypeSimulator';
 import CreditSlider from './components/CreditSlider';
 import RetirementClock from './components/RetirementClock';
 import StrategyModule from './components/StrategyModule';
+import InvestmentsModule from './components/InvestmentsModule';
+import RetirementModule from './components/RetirementModule';
 import ContactCard from './components/ContactCard';
 import PresenterConsole from './components/PresenterConsole';
 
 const topics = [
-  { id: 'credit', title: 'Building & Maintaining Credit', icon: <CreditCard size={24} />, description: 'Mastering your financial reputation.' },
-  { id: 'retirement', title: 'Retirement Planning', icon: <PiggyBank size={24} />, description: 'Making time your greatest ally.' },
-  { id: 'investing', title: 'Investing Basics', icon: <TrendingUp size={24} />, description: 'Putting your money to work.' },
-  { id: 'memes', title: 'Friends, Memes & Hype', icon: <Zap size={24} />, description: 'Navigating the noise of modern finance.' },
+  { id: 'investments', title: 'Investment Vehicles', icon: <TrendingUp size={24} />, description: 'Stocks, Bonds & Funds: The building blocks.' },
+  { id: 'retirement-basics', title: 'Retirement Foundations', icon: <PiggyBank size={24} />, description: 'Roth, 401k, and IRA essentials.' },
   { id: 'protection', title: 'Protection & Growth', icon: <ShieldCheck size={24} />, description: 'Annuities & Insurance: The foundation of a secure plan.' },
+  { id: 'memes', title: 'Friends, Memes & Hype', icon: <Zap size={24} />, description: 'Navigating the noise of modern finance.' },
 ];
 
 function App() {
@@ -31,7 +32,9 @@ function App() {
     unlockedModules: []
   });
 
-  const isAdmin = window.location.search.includes('admin=1') || window.location.search.includes('admin-1');
+  const isAdminUrl = window.location.search.includes('admin=1') || window.location.search.includes('admin-1');
+  const [adminPass, setAdminPass] = useState('');
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
 
   useEffect(() => {
     const stateRef = ref(db, 'presentation/state');
@@ -70,7 +73,45 @@ function App() {
     });
   };
 
-  if (isAdmin) return <PresenterConsole />;
+  if (isAdminUrl && !isAdminAuthenticated) {
+    return (
+      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <div className="glass-card" style={{ padding: '40px', textAlign: 'center', maxWidth: '400px' }}>
+          <Lock size={48} color="var(--color-gold-primary)" style={{ marginBottom: '20px' }} />
+          <h2>Presenter Login</h2>
+          <p style={{ color: 'var(--color-text-muted)', marginBottom: '25px' }}>Enter passcode to access console</p>
+          <input 
+            type="password" 
+            placeholder="Passcode" 
+            value={adminPass}
+            onChange={(e) => setAdminPass(e.target.value)}
+            style={{ 
+              width: '100%', 
+              padding: '12px', 
+              borderRadius: '8px', 
+              border: '1px solid #ddd', 
+              textAlign: 'center',
+              fontSize: '1.2rem',
+              letterSpacing: '5px',
+              marginBottom: '20px'
+            }}
+          />
+          <button 
+            className="btn-primary" 
+            style={{ width: '100%' }}
+            onClick={() => {
+              if (adminPass === '7878') setIsAdminAuthenticated(true);
+              else alert('Invalid Passcode');
+            }}
+          >
+            Authenticate
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (isAdminUrl && isAdminAuthenticated) return <PresenterConsole />;
 
   return (
     <div className="container">
@@ -142,11 +183,16 @@ function App() {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', overflowX: 'auto', paddingBottom: '5px' }}>
-                {['hype', 'credit', 'retirement', 'protection'].map((tabId) => {
+                {['hype', 'credit', 'investments', 'retirement-basics', 'protection'].map((tabId) => {
                   const unlocked = remoteState.unlockedModules || [];
                   const isUnlocked = unlocked.includes(tabId);
-                  const labels = { hype: 'Meme vs Market', credit: 'Credit Impact', retirement: 'Time is Money', protection: 'Protection & Growth' };
+                  const labels = { 
+                    hype: 'Meme vs Market', 
+                    credit: 'Credit Impact', 
+                    investments: 'Investments',
+                    'retirement-basics': 'Retirement',
+                    protection: 'Protection & Growth' 
+                  };
                   
                   return (
                     <button 
@@ -164,7 +210,8 @@ function App() {
 
               {activeTab === 'hype' && <HypeSimulator />}
               {activeTab === 'credit' && <CreditSlider />}
-              {activeTab === 'retirement' && <RetirementClock />}
+              {activeTab === 'investments' && <InvestmentsModule />}
+              {activeTab === 'retirement-basics' && <RetirementModule />}
               {activeTab === 'protection' && <StrategyModule remoteState={remoteState} />}
             </motion.div>
           ) : currentView === 'closing' ? (

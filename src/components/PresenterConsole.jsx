@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { db, ref, onValue, set } from '../firebase';
 import { motion } from 'framer-motion';
-import { Unlock, Lock, Power, RefreshCw, Eye, EyeOff } from 'lucide-react';
+import { Unlock, Lock, Power, RefreshCw, Eye, EyeOff, RotateCcw } from 'lucide-react';
 
 const modules = [
-  { id: 'hype', label: 'Meme vs Market' },
-  { id: 'credit', label: 'Credit Impact' },
-  { id: 'retirement', label: 'Time is Money' },
+  { id: 'investments', label: 'Investments' },
+  { id: 'retirement-basics', label: 'Retirement' },
   { id: 'protection', label: 'Protection & Growth' },
   { id: 'closing', label: 'Final Summary & Contact' }
 ];
@@ -17,6 +16,22 @@ const PresenterConsole = () => {
     unlockedModules: []
   });
   const [votes, setVotes] = useState({});
+  const [timer, setTimer] = useState(0);
+  const [timerActive, setTimerActive] = useState(false);
+
+  useEffect(() => {
+    let interval;
+    if (timerActive) {
+      interval = setInterval(() => setTimer(t => t + 1), 1000);
+    }
+    return () => clearInterval(interval);
+  }, [timerActive]);
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
 
   useEffect(() => {
     const stateRef = ref(db, 'presentation/state');
@@ -133,13 +148,35 @@ const PresenterConsole = () => {
       {/* Right: Controls */}
       <div className="glass-card" style={{ padding: '30px', border: '2px solid var(--color-brown-primary)' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <Power size={24} color="var(--color-gold-primary)" />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <div 
+            onClick={() => setTimerActive(!timerActive)}
+            style={{ 
+              background: 'var(--color-gold-primary)', 
+              color: 'white', 
+              padding: '4px 12px', 
+              borderRadius: '20px', 
+              fontSize: '0.8rem', 
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px'
+            }}
+          >
+            <RefreshCw size={12} style={{ animation: timerActive ? 'spin 2s linear infinite' : 'none' }} />
+            {formatTime(timer)}
+          </div>
           <h2 style={{ margin: 0 }}>Presenter Console</h2>
         </div>
-        <button onClick={resetSession} style={{ background: 'none', border: 'none', color: '#d32f2f', cursor: 'pointer' }}>
-          <RefreshCw size={20} />
-        </button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button onClick={() => { setTimer(0); setTimerActive(false); }} style={{ background: 'none', border: 'none', color: 'var(--color-text-muted)', cursor: 'pointer' }}>
+            <RotateCcw size={18} />
+          </button>
+          <button onClick={resetSession} style={{ background: 'none', border: 'none', color: '#d32f2f', cursor: 'pointer' }}>
+            <Power size={20} />
+          </button>
+        </div>
       </div>
 
       <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginBottom: '20px' }}>
