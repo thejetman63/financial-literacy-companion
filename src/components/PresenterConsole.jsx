@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db, ref, onValue, set } from '../firebase';
 import { motion } from 'framer-motion';
 import { Unlock, Lock, Power, RefreshCw, Eye, EyeOff, RotateCcw } from 'lucide-react';
+import PollResults from './PollResults';
 
 const modules = [
   { id: 'investments', label: 'Investments' },
@@ -119,31 +120,7 @@ const PresenterConsole = () => {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', padding: '40px', maxWidth: '1200px', margin: '0 auto' }}>
       {/* Left: Results Chart */}
-      <div className="glass-card" style={{ padding: '30px' }}>
-        <h2 style={{ marginBottom: '20px' }}>Live Poll Results ({totalVotes} votes)</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          {modules.filter(m => m.id !== 'closing').map(mod => {
-            const count = votes[mod.id] || 0;
-            const percentage = totalVotes > 0 ? (count / totalVotes) * 100 : 0;
-            
-            return (
-              <div key={mod.id}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', fontSize: '0.9rem' }}>
-                  <span>{mod.label}</span>
-                  <span style={{ fontWeight: 'bold' }}>{count}</span>
-                </div>
-                <div style={{ height: '24px', background: 'rgba(0,0,0,0.05)', borderRadius: '12px', overflow: 'hidden' }}>
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: `${percentage}%` }}
-                    style={{ height: '100%', background: 'var(--color-gold-primary)' }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <PollResults votes={votes} modules={modules} />
 
       {/* Right: Controls */}
       <div className="glass-card" style={{ padding: '30px', border: '2px solid var(--color-brown-primary)' }}>

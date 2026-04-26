@@ -10,6 +10,7 @@ import RetirementClock from './components/RetirementClock';
 import StrategyModule from './components/StrategyModule';
 import InvestmentsModule from './components/InvestmentsModule';
 import RetirementModule from './components/RetirementModule';
+import PollResults from './components/PollResults';
 import ContactCard from './components/ContactCard';
 import PresenterConsole from './components/PresenterConsole';
 
@@ -25,6 +26,8 @@ function App() {
   const [hasVoted, setHasVoted] = useState(false);
   const [currentView, setCurrentView] = useState('poll'); 
   const [activeTab, setActiveTab] = useState('hype'); 
+  const [showResults, setShowResults] = useState(false);
+  const [votes, setVotes] = useState({});
   
   // Real-time Presentation State
   const [remoteState, setRemoteState] = useState({
@@ -38,6 +41,13 @@ function App() {
 
   useEffect(() => {
     const stateRef = ref(db, 'presentation/state');
+    const votesRef = ref(db, 'presentation/votes');
+
+    onValue(votesRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) setVotes(data);
+    });
+
     return onValue(stateRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -71,6 +81,11 @@ function App() {
       origin: { y: 0.6 },
       colors: ['#D4AF37', '#4B3621', '#FFD700']
     });
+
+    // Wait 1.5 seconds then show results
+    setTimeout(() => {
+      setShowResults(true);
+    }, 1500);
   };
 
   if (isAdminUrl && !isAdminAuthenticated) {
@@ -254,6 +269,17 @@ function App() {
                   </div>
                 </motion.div>
               </div>
+
+              {/* Reveal Live Results after a delay */}
+              {showResults && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{ marginTop: '40px' }}
+                >
+                  <PollResults votes={votes} modules={topics} />
+                </motion.div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
