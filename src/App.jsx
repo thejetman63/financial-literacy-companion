@@ -198,6 +198,7 @@ function App() {
                 </div>
               </div>
 
+              <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', overflowX: 'auto', paddingBottom: '5px' }}>
                 {['hype', 'credit', 'investments', 'retirement-basics', 'protection'].map((tabId) => {
                   const unlocked = remoteState.unlockedModules || [];
                   const isUnlocked = unlocked.includes(tabId);
