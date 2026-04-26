@@ -6,8 +6,8 @@ const ContactCard = () => {
   // Placeholder info - User can swap this later
   const contactInfo = {
     name: "Financial Advisor Name",
-    title: "Financial Advisor | Wells Fargo Advisors",
-    email: "advisor@wellsfargo.com",
+    title: "Executive Financial Advisor",
+    email: "advisor@example.com",
     phone: "555-0123",
     linkedin: "https://linkedin.com/in/username"
   };
@@ -16,7 +16,7 @@ const ContactCard = () => {
     const vcard = `BEGIN:VCARD
 VERSION:3.0
 FN:${contactInfo.name}
-ORG:Wells Fargo Advisors
+ORG:Strategic Wealth Group
 TITLE:${contactInfo.title}
 TEL;TYPE=WORK,VOICE:${contactInfo.phone}
 EMAIL;TYPE=PREF,INTERNET:${contactInfo.email}

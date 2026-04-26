@@ -286,7 +286,7 @@ function App() {
       </main>
 
       <footer style={{ marginTop: '60px', textAlign: 'center', padding: '20px', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
-        Wells Fargo Advisors &copy; 2024<br/>
+        Strategic Strategy Team &copy; 2024<br/>
         For Educational Purposes Only.
       </footer>
       
