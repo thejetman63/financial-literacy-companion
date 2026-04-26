@@ -3,235 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Literacy Presentation - Backup Deck</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>Financial Strategy - Backup Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #D4AF37;
             --brown: #4B3621;
-            --espresso: #2A1E13;
-            --text-light: #F5F5F5;
-            --text-dark: #333;
+            --off-white: #FCFBF7;
+            --text-dark: #2A1E13;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Outfit', sans-serif;
-            background: var(--espresso);
-            overflow: hidden;
-            color: var(--text-light);
+            background: var(--off-white);
+            color: var(--text-dark);
+            overflow-x: hidden;
         }
         .slide {
             width: 100vw;
             height: 100vh;
-            display: flex;
+            display: none;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 80px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            background: var(--espresso);
-        }
-        .slide.active { opacity: 1; z-index: 10; }
-        
-        /* Content Slide Styles */
-        .content-slide {
-            background: white;
-            color: var(--text-dark);
-            align-items: flex-start;
-            justify-content: flex-start;
-        }
-        .content-slide h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--brown);
-            font-size: 3.5rem;
-            margin-bottom: 40px;
-            border-bottom: 4px solid var(--gold);
-            width: 100%;
-            padding-bottom: 10px;
-        }
-        .content-slide ul {
-            list-style: none;
-            font-size: 1.8rem;
-            line-height: 1.6;
-        }
-        .content-slide li {
-            margin-bottom: 25px;
+            padding: 8% 10%;
+            background: var(--off-white);
             position: relative;
+        }
+        .slide.active { display: flex; }
+        
+        /* Typography */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5.5rem;
+            line-height: 1.1;
+            color: var(--brown);
+            margin-bottom: 30px;
+        }
+        .headline {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 40px;
+            border-left: 12px solid var(--gold);
             padding-left: 40px;
         }
-        .content-slide li::before {
-            content: "•";
+        .subheadline {
+            font-size: 1.8rem;
             color: var(--gold);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            font-size: 2.5rem;
-            line-height: 1;
-        }
-
-        /* Title Slide Styles */
-        .title-slide h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            color: var(--gold);
-            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 400;
             margin-bottom: 20px;
         }
-        .title-slide p {
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: rgba(255,255,255,0.7);
+        ul {
+            list-style: none;
+            margin-top: 20px;
         }
-        .title-slide .accent {
-            width: 200px;
-            height: 4px;
-            background: var(--gold);
-            margin: 40px 0;
+        li {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 60px;
+            color: #555;
+        }
+        li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
         }
 
-        /* Nav Controls */
+        /* Branding - Neutral */
+        .footer-brand {
+            position: absolute;
+            bottom: 40px;
+            left: 10%;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(0,0,0,0.2);
+        }
+
+        /* Navigation */
         .controls {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 100;
+            bottom: 40px;
+            right: 40px;
             display: flex;
-            gap: 15px;
+            gap: 10px;
+            z-index: 1000;
         }
         .btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 10px 20px;
+            background: white;
+            border: 1px solid #ddd;
+            color: var(--brown);
+            padding: 12px 24px;
             cursor: pointer;
-            border-radius: 5px;
-            font-family: inherit;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.2s;
         }
-        .btn:hover { background: var(--gold); color: white; }
-
-        .slide-num {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            font-size: 1rem;
-            color: rgba(0,0,0,0.3);
-            z-index: 100;
-        }
-        .content-slide .slide-num { color: rgba(0,0,0,0.3); }
-        .title-slide .slide-num { color: rgba(255,255,255,0.3); }
-
+        .btn:hover { border-color: var(--gold); color: var(--gold); }
+        
         @media print {
-            .slide { position: relative !important; opacity: 1 !important; page-break-after: always; display: flex !important; }
-            .controls { display: none !important; }
+            .slide { display: flex !important; page-break-after: always; }
+            .controls { display: none; }
         }
     </style>
 </head>
 <body>
 
     <!-- Slide 1: Title -->
-    <div class="slide title-slide active" id="slide-0">
-        <p>Strategic Roadmap</p>
-        <h1>Navigating Your<br/>Financial Future</h1>
-        <div class="accent"></div>
-        <p>Private Banking & Wealth Management</p>
-        <div class="slide-num">Slide 1</div>
+    <div class="slide active" id="slide-0">
+        <div class="subheadline">Private Presentation</div>
+        <h1>Navigating Your<br/><span style="color: var(--gold)">Financial Future</span></h1>
+        <div style="width: 150px; height: 8px; background: var(--gold); margin-top: 40px;"></div>
+        <div class="footer-brand">STRATEGIC WEALTH GROUP</div>
     </div>
 
     <!-- Slide 2: Hype vs Reality -->
-    <div class="slide content-slide" id="slide-1">
-        <h2>The Noise: Hype vs. Reality</h2>
+    <div class="slide" id="slide-1">
+        <div class="subheadline">The Noise</div>
+        <div class="headline">Hype vs. Reality</div>
         <ul>
-            <li><strong>The "FOMO" Trap</strong>: Why emotional investing is the fastest way to lose capital.</li>
-            <li><strong>Meme Stocks</strong>: Understanding the difference between speculation and investment.</li>
-            <li><strong>The Boring Advantage</strong>: Why consistent, fundamental growth beats "viral" returns 100% of the time.</li>
-            <li><strong>Signal vs. Noise</strong>: Learning to ignore the dinner table "hot tips."</li>
+            <li>Emotional FOMO is a Capital Tax</li>
+            <li>Speculation vs. Solid Foundation</li>
+            <li>The 8% "Tortoise" Rule</li>
         </ul>
-        <div class="slide-num">Slide 2</div>
+        <div class="footer-brand">MODULE 1: BEHAVIORAL FINANCE</div>
     </div>
 
-    <!-- Slide 3: Credit -->
-    <div class="slide content-slide" id="slide-2">
-        <h2>Your Financial Reputation</h2>
+    <!-- Slide 3: Investments -->
+    <div class="slide" id="slide-2">
+        <div class="subheadline">The Engine</div>
+        <div class="headline">Investment Vehicles</div>
         <ul>
-            <li><strong>Credit as Leverage</strong>: It's not just a score; it's the price of your future lifestyle.</li>
-            <li><strong>The Interest Tax</strong>: How a 620 score can cost you $150k more in interest than a 750 score.</li>
-            <li><strong>Maintenance</strong>: 3 key habits to protect your borrowing power.</li>
-            <li><strong>The Mortgage Impact</strong>: Small score changes = massive long-term savings.</li>
+            <li><strong>Stocks</strong>: Ownership & Upside</li>
+            <li><strong>Bonds</strong>: Lending & Stability</li>
+            <li><strong>Funds</strong>: Instant Diversification</li>
         </ul>
-        <div class="slide-num">Slide 3</div>
+        <div class="footer-brand">MODULE 2: CORE ASSETS</div>
     </div>
 
     <!-- Slide 4: Retirement -->
-    <div class="slide content-slide" id="slide-3">
-        <h2>The Procrastination Tax</h2>
+    <div class="slide" id="slide-3">
+        <div class="subheadline">The Map</div>
+        <div class="headline">Retirement Pillars</div>
         <ul>
-            <li><strong>Compound Interest</strong>: The only "free lunch" in the financial world.</li>
-            <li><strong>The Cost of Waiting</strong>: Why starting at 22 is 2x easier than starting at 32.</li>
-            <li><strong>Market Timing</strong>: Time <em>in</em> the market always beats <em>timing</em> the market.</li>
-            <li><strong>Automaticity</strong>: The power of a "Set and Forget" contribution strategy.</li>
+            <li><strong>Trad vs. Roth</strong> (Tax Now or Later)</li>
+            <li><strong>DC vs. DB</strong> (Your Risk vs. Their Risk)</li>
+            <li><strong>IRA vs. QRP</strong> (Personal vs. Group)</li>
         </ul>
-        <div class="slide-num">Slide 4</div>
+        <div class="footer-brand">MODULE 3: RETIREMENT BLUEPRINT</div>
     </div>
 
-    <!-- Slide 5: Annuities -->
-    <div class="slide content-slide" id="slide-5">
-        <h2>Protected Accumulation</h2>
+    <!-- Slide 5: Protection & Growth -->
+    <div class="slide" id="slide-4">
+        <div class="subheadline">The Shield</div>
+        <div class="headline">Protection & Growth</div>
         <ul>
-            <li><strong>The Income Floor</strong>: Using Deferred Annuities to guarantee your lifestyle.</li>
-            <li><strong>Fixed vs. Variable</strong>: Understanding the spectrum of risk and protection.</li>
-            <li><strong>RILA & FIA</strong>: Modern strategies for participating in growth with a safety net.</li>
-            <li><strong>Tax Deferral</strong>: Why annuities are a powerful bucket for long-term tax efficiency.</li>
+            <li><strong>Annuities</strong>: The Income Floor</li>
+            <li><strong>Insurance</strong>: The Multi-Tool Asset</li>
+            <li><strong>Living Benefits</strong>: Use it while you're here</li>
         </ul>
-        <div class="slide-num">Slide 5</div>
+        <div class="footer-brand">MODULE 4: STRATEGIC RISK</div>
     </div>
 
-    <!-- Slide 6: Insurance -->
-    <div class="slide content-slide" id="slide-6">
-        <h2>The Protection Asset</h2>
+    <!-- Slide 6: Closing -->
+    <div class="slide" id="slide-5">
+        <div class="subheadline">Your Move</div>
+        <div class="headline">Closing the Gaps</div>
         <ul>
-            <li><strong>Human Capital</strong>: Your ability to earn is your most valuable asset.</li>
-            <li><strong>The Living Benefit</strong>: Permanent insurance as a source of tax-free liquidity.</li>
-            <li><strong>Wealth Transfer</strong>: Ensuring your legacy is protected from market volatility.</li>
-            <li><strong>The Strategic Reservoir</strong>: Using cash value as a flexible financial tool.</li>
+            <li>Audit Your Current Trajectory</li>
+            <li>Action beats Perfection</li>
+            <li>Let's Connect & Refine</li>
         </ul>
-        <div class="slide-num">Slide 6</div>
-    </div>
-
-    <!-- Slide 7: Closing -->
-    <div class="slide content-slide" id="slide-6">
-        <h2>Next Steps</h2>
-        <ul>
-            <li><strong>Audit Your Current Path</strong>: Where are the gaps in your strategy?</li>
-            <li><strong>Schedule a Consultation</strong>: Let’s build your custom roadmap.</li>
-            <li><strong>Action Items</strong>: One small change today creates a massive shift in 30 years.</li>
-            <li><strong>Contact Info</strong>: Reach out anytime to discuss your specific goals.</li>
-        </ul>
-        <div class="slide-num">Slide 7</div>
+        <div class="footer-brand">CONCLUSION & NEXT STEPS</div>
     </div>
 
     <div class="controls">
-        <button class="btn" onclick="prevSlide()">← Previous</button>
-        <button class="btn" onclick="nextSlide()">Next →</button>
-        <button class="btn" onclick="window.print()" style="background: var(--gold)">Save as PDF</button>
+        <button class="btn" onclick="prevSlide()">←</button>
+        <button class="btn" onclick="nextSlide()">→</button>
     </div>
 
     <script>
         let currentSlide = 0;
-        const totalSlides = 7;
+        const slides = document.querySelectorAll('.slide');
 
         function showSlide(n) {
-            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-            document.getElementById(`slide-${n}`).classList.add('active');
+            slides.forEach(s => s.classList.remove('active'));
+            slides[n].classList.add('active');
             currentSlide = n;
         }
 
         function nextSlide() {
-            if (currentSlide < totalSlides - 1) showSlide(currentSlide + 1);
+            if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
         }
 
         function prevSlide() {
