@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { db, ref, onValue, set } from '../firebase';
-import { Unlock, Lock, Power, RefreshCw, Eye, EyeOff, RotateCcw } from 'lucide-react';
+import { Unlock, Lock, Power, RefreshCw, Eye, EyeOff, RotateCcw, ExternalLink } from 'lucide-react';
 import PollResults from './PollResults';
 
 const modules = [
@@ -145,6 +145,24 @@ const PresenterConsole = () => {
           <h2 style={{ margin: 0 }}>Presenter Console</h2>
         </div>
         <div style={{ display: 'flex', gap: '10px' }}>
+          <button 
+            onClick={() => window.open('/slides.html', '_blank')}
+            style={{ 
+              background: 'rgba(212, 175, 55, 0.1)', 
+              border: '1px solid var(--color-gold-primary)', 
+              color: 'var(--color-brown-primary)', 
+              padding: '6px 12px',
+              borderRadius: '20px',
+              fontSize: '0.75rem',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px'
+            }}
+          >
+            <ExternalLink size={14} /> Backup Deck
+          </button>
           <button onClick={() => { setTimer(0); setTimerActive(false); }} style={{ background: 'none', border: 'none', color: 'var(--color-text-muted)', cursor: 'pointer' }}>
             <RotateCcw size={18} />
           </button>
