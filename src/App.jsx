@@ -198,6 +198,14 @@ function App() {
                   </motion.button>
                 ))}
               </div>
+
+              {/* PWA Install Hint */}
+              <div style={{ marginTop: '30px', textAlign: 'center', background: 'rgba(0,0,0,0.03)', padding: '12px', borderRadius: '12px', border: '1px dashed rgba(0,0,0,0.1)' }}>
+                <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                  <Home size={14} />
+                  <span>For the best experience, tap <strong>Share</strong> → <strong>Add to Home Screen</strong></span>
+                </p>
+              </div>
             </motion.div>
           ) : currentView === 'topics' ? (
             <motion.div

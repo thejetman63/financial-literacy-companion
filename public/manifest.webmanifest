@@ -1,0 +1,17 @@
+{
+  "name": "Financial Strategy Companion",
+  "short_name": "FinanceApp",
+  "description": "Interactive companion for your financial literacy journey.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2A1E13",
+  "theme_color": "#4B3621",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
