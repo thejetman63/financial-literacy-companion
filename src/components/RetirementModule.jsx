@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PiggyBank, ArrowLeftRight, HelpCircle } from 'lucide-react';
+import { PiggyBank, ArrowLeftRight, HelpCircle, TrendingUp } from 'lucide-react';
 
 const RetirementModule = () => {
   const comparisons = [
