@@ -1,6 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, Landmark, Layers, ArrowRight } from 'lucide-react';
+import { TrendingUp, Landmark, Layers } from 'lucide-react';
 
 const InvestmentsModule = () => {
   const vehicles = [

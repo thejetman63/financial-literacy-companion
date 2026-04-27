@@ -34,21 +34,21 @@ try {
 const safeRef = (db, path) => {
   try {
     return db && db.app ? ref(db, path) : null;
-  } catch (e) { return null; }
+  } catch { return null; }
 };
 
 const safeOnValue = (reference, callback, options) => {
   if (!reference) return () => {};
   try {
     return onValue(reference, callback, options);
-  } catch (e) { return () => {}; }
+  } catch { return () => {}; }
 };
 
 const safeSet = (reference, value) => {
   if (!reference) return Promise.resolve();
   try {
     return set(reference, value);
-  } catch (e) { return Promise.resolve(); }
+  } catch { return Promise.resolve(); }
 };
 
 export { db, safeRef as ref, safeOnValue as onValue, safeSet as set, increment, update };

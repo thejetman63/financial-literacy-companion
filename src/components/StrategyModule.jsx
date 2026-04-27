@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, Landmark, Heart, Wallet, Users, Zap } from 'lucide-react';
+import { ShieldCheck, Landmark, Heart, Users, Zap } from 'lucide-react';
 
 const StrategyModule = ({ remoteState }) => {
   // Use remote state to control which part of the strategy we are showing

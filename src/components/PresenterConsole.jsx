@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { db, ref, onValue, set } from '../firebase';
-import { motion } from 'framer-motion';
 import { Unlock, Lock, Power, RefreshCw, Eye, EyeOff, RotateCcw } from 'lucide-react';
 import PollResults from './PollResults';
 
@@ -54,7 +53,6 @@ const PresenterConsole = () => {
     };
   }, []);
 
-  const totalVotes = Object.values(votes).reduce((a, b) => a + b, 0);
 
   const toggleModule = (id) => {
     const unlocked = sessionState.unlockedModules || [];

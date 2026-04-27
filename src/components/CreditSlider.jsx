@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CreditCard, ShieldCheck, TrendingUp, DollarSign, Info } from 'lucide-react';
+import { TrendingUp, Info, ShieldCheck } from 'lucide-react';
 
 const CreditSlider = () => {
   const [utilization, setUtilization] = useState(15); // Percentage

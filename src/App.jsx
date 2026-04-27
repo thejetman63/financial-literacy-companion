@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CreditCard, TrendingUp, ShieldCheck, Landmark, PiggyBank, Zap, BarChart3, ChevronRight, Home, Lock } from 'lucide-react';
+import { TrendingUp, ShieldCheck, PiggyBank, Zap, BarChart3, Home, Lock } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { db, ref, onValue, set, increment, update } from './firebase';
+import { db, ref, onValue, increment, update } from './firebase';
 
 import HypeSimulator from './components/HypeSimulator';
 import CreditSlider from './components/CreditSlider';
-import RetirementClock from './components/RetirementClock';
 import StrategyModule from './components/StrategyModule';
 import InvestmentsModule from './components/InvestmentsModule';
 import RetirementModule from './components/RetirementModule';
@@ -23,10 +22,10 @@ const topics = [
 
 function App() {
   const [selectedTopic, setSelectedTopic] = useState(null);
-  const [hasVoted, setHasVoted] = useState(false);
+  const [hasVoted, setHasVoted] = useState(() => localStorage.getItem('financial_literacy_voted') === 'true');
   const [currentView, setCurrentView] = useState('poll'); 
   const [activeTab, setActiveTab] = useState('hype'); 
-  const [showResults, setShowResults] = useState(false);
+  const [showResults, setShowResults] = useState(() => localStorage.getItem('financial_literacy_voted') === 'true');
   const [votes, setVotes] = useState({});
   
   // Real-time Presentation State
@@ -68,15 +67,6 @@ function App() {
         }
       }
     });
-  }, []);
-
-  // Check for previous vote on mount
-  useEffect(() => {
-    const previouslyVoted = localStorage.getItem('financial_literacy_voted');
-    if (previouslyVoted) {
-      setHasVoted(true);
-      setShowResults(true);
-    }
   }, []);
 
   const handleVote = (id) => {

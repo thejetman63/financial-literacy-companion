@@ -1,6 +1,4 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { UserPlus, Globe, Mail, Phone, ExternalLink } from 'lucide-react';
+import { UserPlus, Globe, Mail } from 'lucide-react';
 
 const ContactCard = () => {
   // Placeholder info - User can swap this later
@@ -36,7 +34,7 @@ END:VCARD`;
   return (
     <div className="glass-card" style={{ padding: '24px', marginTop: '20px', textAlign: 'center' }}>
       <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'var(--color-gold-primary)', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '2rem', fontWeight: 'bold' }}>
-        WF
+        SA
       </div>
       <h3 style={{ margin: '0 0 5px 0' }}>{contactInfo.name}</h3>
       <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginBottom: '20px' }}>{contactInfo.title}</p>
