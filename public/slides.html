@@ -103,6 +103,8 @@
             font-weight: bold;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: all 0.2s;
+            font-size: 1rem;
+            font-family: inherit;
         }
         .btn:hover { border-color: var(--gold); color: var(--gold); }
         
@@ -185,6 +187,8 @@
     <div class="controls">
         <button class="btn" onclick="prevSlide()">←</button>
         <button class="btn" onclick="nextSlide()">→</button>
+        <button class="btn" onclick="window.print()" style="background: var(--gold); color: white;">Save as PDF</button>
+        <a href="/slides.html" download="Financial_Strategy_Presentation.html" class="btn" style="text-decoration: none; display: inline-block; background: var(--brown); color: white;">Download Source (HTML)</a>
     </div>
 
     <script>
