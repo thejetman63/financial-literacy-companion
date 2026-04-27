@@ -52,18 +52,31 @@ function App() {
       const data = snapshot.val();
       if (data) {
         setRemoteState(data);
-        // Force jump to the active module if it changes and is unlocked
-        if (data.activeModule !== 'none' && data.activeModule !== 'closing') {
+
+        // If session is reset to 'none', allow voting again by clearing local storage
+        if (data.activeModule === 'none') {
+          localStorage.removeItem('financial_literacy_voted');
+          setHasVoted(false);
+          setShowResults(false);
+          setCurrentView('poll');
+        } else if (data.activeModule !== 'closing') {
+          // Force jump to the active module if it changes and is unlocked
           setCurrentView('topics');
           setActiveTab(data.activeModule);
         } else if (data.activeModule === 'closing') {
           setCurrentView('closing');
-        } else if (data.activeModule === 'none') {
-          setCurrentView('poll');
-          setHasVoted(false);
         }
       }
     });
+  }, []);
+
+  // Check for previous vote on mount
+  useEffect(() => {
+    const previouslyVoted = localStorage.getItem('financial_literacy_voted');
+    if (previouslyVoted) {
+      setHasVoted(true);
+      setShowResults(true);
+    }
   }, []);
 
   const handleVote = (id) => {
@@ -81,6 +94,9 @@ function App() {
       origin: { y: 0.6 },
       colors: ['#D4AF37', '#4B3621', '#FFD700']
     });
+
+    // Save to local storage to prevent double-voting on refresh
+    localStorage.setItem('financial_literacy_voted', 'true');
 
     // Wait 1.5 seconds then show results
     setTimeout(() => {
