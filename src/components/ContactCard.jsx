@@ -1,4 +1,4 @@
-import { UserPlus, Globe, Mail } from 'lucide-react';
+import { UserPlus, Mail } from 'lucide-react';
 
 const ContactCard = () => {
   // Placeholder info - User can swap this later
@@ -6,8 +6,7 @@ const ContactCard = () => {
     name: "Brian Jetton",
     title: "Senior Financial Advisor",
     email: "brian.jetton@wellsfargo.com",
-    phone: "972-341-8819",
-    linkedin: "https://linkedin.com/"
+    phone: "972-341-8819"
   };
 
   const downloadVCard = () => {
@@ -18,7 +17,6 @@ ORG:Financial Strategy
 TITLE:${contactInfo.title}
 TEL;TYPE=WORK,VOICE:${contactInfo.phone}
 EMAIL;TYPE=PREF,INTERNET:${contactInfo.email}
-URL:${contactInfo.linkedin}
 END:VCARD`;
 
     const blob = new Blob([vcard], { type: 'text/vcard' });
@@ -33,11 +31,8 @@ END:VCARD`;
 
   return (
     <div className="glass-card" style={{ padding: '24px', marginTop: '20px', textAlign: 'center' }}>
-      <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'var(--color-gold-primary)', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '2rem', fontWeight: 'bold' }}>
-        BJ
-      </div>
-      <h3 style={{ margin: '0 0 5px 0' }}>{contactInfo.name}</h3>
-      <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginBottom: '20px' }}>{contactInfo.title}</p>
+      <h2 style={{ margin: '0 0 10px 0', fontSize: '2rem', color: 'var(--color-brown-primary)' }}>{contactInfo.name}</h2>
+      <p style={{ fontSize: '1.1rem', color: 'var(--color-gold-primary)', fontWeight: 'bold', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '1px' }}>{contactInfo.title}</p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <button 
@@ -48,14 +43,9 @@ END:VCARD`;
           <UserPlus size={18} /> Add to Contacts
         </button>
         
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-          <a href={`mailto:${contactInfo.email}`} className="poll-option" style={{ margin: 0, padding: '10px', display: 'flex', justifyContent: 'center', color: 'var(--color-brown-primary)' }}>
-            <Mail size={20} />
-          </a>
-          <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer" className="poll-option" style={{ margin: 0, padding: '10px', display: 'flex', justifyContent: 'center', color: 'var(--color-brown-primary)' }}>
-            <Globe size={20} />
-          </a>
-        </div>
+        <a href={`mailto:${contactInfo.email}`} className="btn-primary" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', background: 'white', color: 'var(--color-brown-primary)', border: '1px solid var(--color-brown-primary)', textDecoration: 'none' }}>
+          <Mail size={18} /> Send Email
+        </a>
       </div>
 
       <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '20px' }}>
