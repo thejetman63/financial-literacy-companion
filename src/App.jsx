@@ -208,9 +208,30 @@ function App() {
               className="glass-card"
               style={{ textAlign: 'center', padding: '60px 20px', marginTop: '40px' }}
             >
-              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Wells_Fargo_Bank.svg" alt="Wells Fargo Advisors" style={{ height: '60px', marginBottom: '30px' }} />
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '30px' }}>
+                <div style={{ fontFamily: "'Times New Roman', serif", fontSize: '2rem', fontWeight: 'bold', color: 'var(--color-gold-primary)', letterSpacing: '1px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="40" height="40" fill="var(--color-gold-primary)"/>
+                        <path d="M10 10 L30 10 L30 30 L10 30 Z" fill="var(--color-brown-primary)"/>
+                        <path d="M15 15 L25 15 L25 25 L15 25 Z" fill="var(--color-gold-primary)"/>
+                    </svg>
+                    <div style={{ lineHeight: 1, textAlign: 'left' }}>
+                        <span style={{ color: 'var(--color-gold-primary)' }}>WELLS FARGO</span><br/>
+                        <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.1rem', fontWeight: 400, color: 'var(--color-brown-primary)', letterSpacing: '2px' }}>Advisors</span>
+                    </div>
+                </div>
+              </div>
               <h2 style={{ fontSize: '2.5rem', marginBottom: '10px', color: 'var(--color-brown-primary)' }}>Brian Jetton</h2>
               <p style={{ fontSize: '1.2rem', color: 'var(--color-gold-primary)', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '2px' }}>Senior Financial Advisor</p>
+              
+              <div style={{ border: '1px solid var(--color-brown-primary)', padding: '15px', marginTop: '40px', borderRadius: '8px', textAlign: 'left', background: 'rgba(75, 54, 33, 0.03)' }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--color-brown-primary)', marginBottom: '8px', textTransform: 'uppercase' }}>Investment and Insurance Products are:</div>
+                <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
+                    <li style={{ marginBottom: '4px' }}>Not Insured by the FDIC or Any Federal Government Agency</li>
+                    <li style={{ marginBottom: '4px' }}>Not a Deposit or Other Obligation of, or Guaranteed by, the Bank or Any Bank Affiliate</li>
+                    <li>Subject to Investment Risks, Including Possible Loss of the Principal Amount Invested</li>
+                </ul>
+              </div>
             </motion.div>
           ) : currentView === 'topics' ? (
             <motion.div
@@ -313,7 +334,10 @@ function App() {
         </AnimatePresence>
       </main>
 
-      <footer style={{ marginTop: '60px', textAlign: 'center', padding: '20px', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
+      <footer style={{ marginTop: '60px', textAlign: 'center', padding: '20px', fontSize: '0.75rem', color: 'var(--color-text-muted)', lineHeight: '1.5' }}>
+        <div style={{ marginBottom: '10px' }}>
+          Investment products and services are offered through Wells Fargo Advisors, a trade name used by Wells Fargo Clearing Services, LLC, a registered broker-dealer and non-bank affiliate of Wells Fargo & Company.
+        </div>
         &copy; 2026<br/>
         For Educational Purposes Only.
       </footer>
