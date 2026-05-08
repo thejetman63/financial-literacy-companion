@@ -209,7 +209,7 @@ function App() {
               style={{ textAlign: 'center', padding: '60px 20px', marginTop: '40px' }}
             >
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '30px' }}>
-                <img src="/wfa-logo.jpg" alt="Wells Fargo Advisors" style={{ height: '80px', objectFit: 'contain' }} />
+                <img src="/WFA.png" alt="Wells Fargo Advisors" style={{ height: '80px', objectFit: 'contain' }} />
               </div>
               <h2 style={{ fontSize: '2.5rem', marginBottom: '10px', color: 'var(--color-brown-primary)' }}>Brian Jetton</h2>
               <p style={{ fontSize: '1.2rem', color: 'var(--color-gold-primary)', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '2px' }}>Senior Financial Advisor</p>
