@@ -16,7 +16,7 @@ const InvestmentsModule = () => {
       desc: 'Loaning money to a govt or corp. Lower risk, steady interest income.' 
     },
     { 
-      title: 'Funds (ETF/Mutual)', 
+      title: 'Mutual Funds & ETFs', 
       icon: <Layers size={20} />, 
       type: 'Diversity', 
       desc: 'A basket of stocks and bonds. Instant diversification in one click.' 
@@ -70,6 +70,10 @@ const InvestmentsModule = () => {
         <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.5 }}>
           Gambling is a "negative sum" game where the house wins. Investing is a "positive sum" game based on corporate earnings and global productivity. Historically, the house (the market) has grown over time.
         </p>
+      </div>
+      
+      <div style={{ marginTop: '15px', fontSize: '0.65rem', color: 'var(--color-text-muted)', textAlign: 'right', fontStyle: 'italic', lineHeight: 1.4 }}>
+        Asset allocation & diversification are investment methods used to help manage risk. They do not guarantee investment returns or eliminate risk of loss including in a declining market
       </div>
     </div>
   );

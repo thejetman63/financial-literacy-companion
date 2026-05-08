@@ -5,7 +5,7 @@ import confetti from 'canvas-confetti';
 import { db, ref, onValue, increment, update } from './firebase';
 
 import HypeSimulator from './components/HypeSimulator';
-import CreditSlider from './components/CreditSlider';
+
 import StrategyModule from './components/StrategyModule';
 import InvestmentsModule from './components/InvestmentsModule';
 import RetirementModule from './components/RetirementModule';
@@ -15,7 +15,6 @@ import PresenterConsole from './components/PresenterConsole';
 
 const topics = [
   { id: 'hype', title: 'Friends, Memes & Hype', icon: <Zap size={24} />, description: 'Navigating the noise of modern finance.' },
-  { id: 'credit', title: 'Credit as an Asset', icon: <BarChart3 size={24} />, description: 'Leveraging credit to build wealth.' },
   { id: 'investments', title: 'Investment Vehicles', icon: <TrendingUp size={24} />, description: 'Stocks, Bonds & Funds: The building blocks.' },
   { id: 'retirement-basics', title: 'Retirement Foundations', icon: <PiggyBank size={24} />, description: 'Roth, 401k, and IRA essentials.' },
   { id: 'protection', title: 'Protection & Growth', icon: <ShieldCheck size={24} />, description: 'Annuities & Insurance: The foundation of a secure plan.' },
@@ -59,6 +58,8 @@ function App() {
           setHasVoted(false);
           setShowResults(false);
           setCurrentView('poll');
+        } else if (data.activeModule === 'title') {
+          setCurrentView('title');
         } else if (data.activeModule !== 'closing') {
           // Force jump to the active module if it changes and is unlocked
           setCurrentView('topics');
@@ -198,6 +199,19 @@ function App() {
                 </p>
               </div>
             </motion.div>
+          ) : currentView === 'title' ? (
+            <motion.div
+              key="title-view"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="glass-card"
+              style={{ textAlign: 'center', padding: '60px 20px', marginTop: '40px' }}
+            >
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Wells_Fargo_Bank.svg" alt="Wells Fargo Advisors" style={{ height: '60px', marginBottom: '30px' }} />
+              <h2 style={{ fontSize: '2.5rem', marginBottom: '10px', color: 'var(--color-brown-primary)' }}>Brian Jetton</h2>
+              <p style={{ fontSize: '1.2rem', color: 'var(--color-gold-primary)', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '2px' }}>Senior Financial Advisor</p>
+            </motion.div>
           ) : currentView === 'topics' ? (
             <motion.div
               key="topics-view"
@@ -214,12 +228,11 @@ function App() {
               </div>
 
               <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', overflowX: 'auto', paddingBottom: '5px' }}>
-                {['hype', 'credit', 'investments', 'retirement-basics', 'protection'].map((tabId) => {
+                {['hype', 'investments', 'retirement-basics', 'protection'].map((tabId) => {
                   const unlocked = remoteState.unlockedModules || [];
                   const isUnlocked = unlocked.includes(tabId);
                   const labels = { 
                     hype: 'Meme vs Market', 
-                    credit: 'Credit Impact', 
                     investments: 'Investments',
                     'retirement-basics': 'Retirement',
                     protection: 'Protection & Growth' 
@@ -240,7 +253,6 @@ function App() {
               </div>
 
               {activeTab === 'hype' && <HypeSimulator />}
-              {activeTab === 'credit' && <CreditSlider />}
               {activeTab === 'investments' && <InvestmentsModule />}
               {activeTab === 'retirement-basics' && <RetirementModule />}
               {activeTab === 'protection' && <StrategyModule remoteState={remoteState} />}

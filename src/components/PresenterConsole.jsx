@@ -4,8 +4,8 @@ import { Unlock, Lock, Power, RefreshCw, Eye, EyeOff, RotateCcw, ExternalLink } 
 import PollResults from './PollResults';
 
 const modules = [
+  { id: 'title', label: 'Title Page' },
   { id: 'hype', label: 'Meme vs Market' },
-  { id: 'credit', label: 'Credit Impact' },
   { id: 'investments', label: 'Investments' },
   { id: 'retirement-basics', label: 'Retirement' },
   { id: 'protection', label: 'Protection & Growth' },
