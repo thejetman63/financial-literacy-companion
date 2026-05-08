@@ -209,17 +209,7 @@ function App() {
               style={{ textAlign: 'center', padding: '60px 20px', marginTop: '40px' }}
             >
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '30px' }}>
-                <div style={{ fontFamily: "'Times New Roman', serif", fontSize: '2rem', fontWeight: 'bold', color: 'var(--color-gold-primary)', letterSpacing: '1px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="40" height="40" fill="var(--color-gold-primary)"/>
-                        <path d="M10 10 L30 10 L30 30 L10 30 Z" fill="var(--color-brown-primary)"/>
-                        <path d="M15 15 L25 15 L25 25 L15 25 Z" fill="var(--color-gold-primary)"/>
-                    </svg>
-                    <div style={{ lineHeight: 1, textAlign: 'left' }}>
-                        <span style={{ color: 'var(--color-gold-primary)' }}>WELLS FARGO</span><br/>
-                        <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.1rem', fontWeight: 400, color: 'var(--color-brown-primary)', letterSpacing: '2px' }}>Advisors</span>
-                    </div>
-                </div>
+                <img src="/wfa-logo.jpg" alt="Wells Fargo Advisors" style={{ height: '80px', objectFit: 'contain' }} />
               </div>
               <h2 style={{ fontSize: '2.5rem', marginBottom: '10px', color: 'var(--color-brown-primary)' }}>Brian Jetton</h2>
               <p style={{ fontSize: '1.2rem', color: 'var(--color-gold-primary)', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '2px' }}>Senior Financial Advisor</p>
