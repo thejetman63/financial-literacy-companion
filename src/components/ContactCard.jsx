@@ -4,7 +4,7 @@ const ContactCard = () => {
   // Placeholder info - User can swap this later
   const contactInfo = {
     name: "Brian Jetton",
-    title: "Financial Strategy Consultant",
+    title: "Senior Financial Advisor",
     email: "brian.jetton@wellsfargo.com",
     phone: "972-341-8819",
     linkedin: "https://linkedin.com/"
