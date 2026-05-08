@@ -115,15 +115,18 @@
             }
             .slide { 
                 display: flex !important; 
-                height: 100vh;
+                min-height: 100vh;
+                height: auto;
                 width: 100vw;
                 page-break-after: always; 
+                page-break-inside: avoid;
                 margin: 0 !important;
                 padding: 8% 10% !important;
                 box-sizing: border-box;
+                overflow: hidden;
             }
             .controls { display: none !important; }
-            body { background: white !important; margin: 0 !important; }
+            body { background: white !important; margin: 0 !important; overflow: visible !important; }
         }
     </style>
 </head>
@@ -147,7 +150,7 @@
         <h1>Navigating Your<br/><span style="color: var(--gold)">Financial Strategy</span></h1>
         <div style="width: 150px; height: 8px; background: var(--gold); margin-top: 20px; margin-bottom: 40px;"></div>
         
-        <div style="border: 2px solid var(--brown); padding: 15px 25px; margin-top: auto; margin-bottom: 60px; max-width: 800px;">
+        <div style="border: 2px solid var(--brown); padding: 15px 25px; margin-top: 30px; margin-bottom: 20px; max-width: 800px; background: white;">
             <div style="font-size: 0.9rem; font-weight: bold; color: var(--brown); margin-bottom: 10px; text-transform: uppercase;">Investment and Insurance Products are:</div>
             <ul style="margin: 0; list-style-type: disc; padding-left: 20px;">
                 <li style="font-size: 0.9rem; margin-bottom: 5px; padding-left: 0; color: var(--text-dark);">Not Insured by the FDIC or Any Federal Government Agency</li>
@@ -155,7 +158,7 @@
                 <li style="font-size: 0.9rem; margin-bottom: 0; padding-left: 0; color: var(--text-dark);">Subject to Investment Risks, Including Possible Loss of the Principal Amount Invested</li>
             </ul>
         </div>
-        <div class="footer-brand">FOR EDUCATIONAL PURPOSES ONLY</div>
+        <div class="footer-brand" style="position: relative; bottom: 0; left: 0; margin-top: auto;">FOR EDUCATIONAL PURPOSES ONLY</div>
     </div>
 
     <!-- Slide 3: Hype vs Reality -->
