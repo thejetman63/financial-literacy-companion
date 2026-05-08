@@ -14,10 +14,11 @@ import ContactCard from './components/ContactCard';
 import PresenterConsole from './components/PresenterConsole';
 
 const topics = [
+  { id: 'hype', title: 'Friends, Memes & Hype', icon: <Zap size={24} />, description: 'Navigating the noise of modern finance.' },
+  { id: 'credit', title: 'Credit as an Asset', icon: <BarChart3 size={24} />, description: 'Leveraging credit to build wealth.' },
   { id: 'investments', title: 'Investment Vehicles', icon: <TrendingUp size={24} />, description: 'Stocks, Bonds & Funds: The building blocks.' },
   { id: 'retirement-basics', title: 'Retirement Foundations', icon: <PiggyBank size={24} />, description: 'Roth, 401k, and IRA essentials.' },
   { id: 'protection', title: 'Protection & Growth', icon: <ShieldCheck size={24} />, description: 'Annuities & Insurance: The foundation of a secure plan.' },
-  { id: 'memes', title: 'Friends, Memes & Hype', icon: <Zap size={24} />, description: 'Navigating the noise of modern finance.' },
 ];
 
 function App() {
@@ -142,7 +143,7 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>Future Wealth</h1>
+          <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>Financial Strategy</h1>
           <div className="accent-bar" style={{ margin: '0 auto' }}></div>
           <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', marginTop: '15px' }}>
             Interactive Presentation Companion
@@ -301,7 +302,7 @@ function App() {
       </main>
 
       <footer style={{ marginTop: '60px', textAlign: 'center', padding: '20px', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
-        Strategic Strategy Team &copy; 2024<br/>
+        &copy; 2026<br/>
         For Educational Purposes Only.
       </footer>
       

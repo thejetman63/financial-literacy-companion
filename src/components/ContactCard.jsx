@@ -3,18 +3,18 @@ import { UserPlus, Globe, Mail } from 'lucide-react';
 const ContactCard = () => {
   // Placeholder info - User can swap this later
   const contactInfo = {
-    name: "Financial Advisor Name",
-    title: "Executive Financial Advisor",
-    email: "advisor@example.com",
-    phone: "555-0123",
-    linkedin: "https://linkedin.com/in/username"
+    name: "Financial Professional",
+    title: "Financial Strategy Consultant",
+    email: "contact@example.com",
+    phone: "555-0100",
+    linkedin: "https://linkedin.com/"
   };
 
   const downloadVCard = () => {
     const vcard = `BEGIN:VCARD
 VERSION:3.0
 FN:${contactInfo.name}
-ORG:Strategic Wealth Group
+ORG:Financial Strategy
 TITLE:${contactInfo.title}
 TEL;TYPE=WORK,VOICE:${contactInfo.phone}
 EMAIL;TYPE=PREF,INTERNET:${contactInfo.email}
@@ -34,7 +34,7 @@ END:VCARD`;
   return (
     <div className="glass-card" style={{ padding: '24px', marginTop: '20px', textAlign: 'center' }}>
       <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'var(--color-gold-primary)', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '2rem', fontWeight: 'bold' }}>
-        SA
+        FP
       </div>
       <h3 style={{ margin: '0 0 5px 0' }}>{contactInfo.name}</h3>
       <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginBottom: '20px' }}>{contactInfo.title}</p>

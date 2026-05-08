@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Strategy - Backup Deck</title>
+    <title>Financial Strategy Presentation - Complete Deck</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -78,10 +78,11 @@
             position: absolute;
             bottom: 40px;
             left: 10%;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: rgba(0,0,0,0.2);
+            color: rgba(0,0,0,0.4);
+            line-height: 1.6;
         }
 
         /* Navigation */
@@ -107,10 +108,22 @@
             font-family: inherit;
         }
         .btn:hover { border-color: var(--gold); color: var(--gold); }
-        
-        @media print {
-            .slide { display: flex !important; page-break-after: always; }
-            .controls { display: none; }
+               @media print {
+            @page { 
+                margin: 0; 
+                size: landscape;
+            }
+            .slide { 
+                display: flex !important; 
+                height: 100vh;
+                width: 100vw;
+                page-break-after: always; 
+                margin: 0 !important;
+                padding: 8% 10% !important;
+                box-sizing: border-box;
+            }
+            .controls { display: none !important; }
+            body { background: white !important; margin: 0 !important; }
         }
     </style>
 </head>
@@ -118,13 +131,12 @@
 
     <!-- Slide 1: Title -->
     <div class="slide active" id="slide-0">
-        <div class="subheadline">Private Presentation</div>
-        <h1>Navigating Your<br/><span style="color: var(--gold)">Financial Future</span></h1>
+        <h1>Navigating Your<br/><span style="color: var(--gold)">Financial Strategy</span></h1>
         <div style="width: 150px; height: 8px; background: var(--gold); margin-top: 40px;"></div>
-        <div class="footer-brand">STRATEGIC WEALTH GROUP</div>
+        <div class="footer-brand">FOR EDUCATIONAL PURPOSES ONLY</div>
     </div>
 
-    <!-- Slide 2: Hype vs Reality -->
+    <!-- Slide 3: Hype vs Reality -->
     <div class="slide" id="slide-1">
         <div class="subheadline">The Noise</div>
         <div class="headline">Hype vs. Reality</div>
@@ -133,10 +145,22 @@
             <li>Speculation vs. Solid Foundation</li>
             <li>The 8% "Tortoise" Rule</li>
         </ul>
-        <div class="footer-brand">MODULE 1: BEHAVIORAL FINANCE</div>
+        <div class="footer-brand">MODULE 1: BEHAVIORAL FINANCE<br/>FOR EDUCATIONAL PURPOSES ONLY</div>
     </div>
 
-    <!-- Slide 3: Investments -->
+    <!-- Slide 4: Credit Strategy (NEW) -->
+    <div class="slide" id="slide-credit">
+        <div class="subheadline">Strategic Assets</div>
+        <div class="headline">Credit as Leverage</div>
+        <ul>
+            <li><strong>Borrowing Power</strong>: The Price of Admission</li>
+            <li><strong>The Anchor</strong>: History & Utilization</li>
+            <li><strong>Arbitrage</strong>: Using OPM (Other People's Money)</li>
+        </ul>
+        <div class="footer-brand">MODULE 2: LEVERAGE & CREDIT<br/>FOR EDUCATIONAL PURPOSES ONLY</div>
+    </div>
+
+    <!-- Slide 5: Investments -->
     <div class="slide" id="slide-2">
         <div class="subheadline">The Engine</div>
         <div class="headline">Investment Vehicles</div>
@@ -145,10 +169,10 @@
             <li><strong>Bonds</strong>: Lending & Stability</li>
             <li><strong>Funds</strong>: Instant Diversification</li>
         </ul>
-        <div class="footer-brand">MODULE 2: CORE ASSETS</div>
+        <div class="footer-brand">MODULE 3: CORE ASSETS<br/>FOR EDUCATIONAL PURPOSES ONLY</div>
     </div>
 
-    <!-- Slide 4: Retirement -->
+    <!-- Slide 6: Retirement -->
     <div class="slide" id="slide-3">
         <div class="subheadline">The Map</div>
         <div class="headline">Retirement Pillars</div>
@@ -157,10 +181,10 @@
             <li><strong>DC vs. DB</strong> (Your Risk vs. Their Risk)</li>
             <li><strong>IRA vs. QRP</strong> (Personal vs. Group)</li>
         </ul>
-        <div class="footer-brand">MODULE 3: RETIREMENT BLUEPRINT</div>
+        <div class="footer-brand">MODULE 4: RETIREMENT BLUEPRINT<br/>FOR EDUCATIONAL PURPOSES ONLY</div>
     </div>
 
-    <!-- Slide 5: Protection & Growth -->
+    <!-- Slide 7: Protection & Growth -->
     <div class="slide" id="slide-4">
         <div class="subheadline">The Shield</div>
         <div class="headline">Protection & Growth</div>
@@ -169,10 +193,10 @@
             <li><strong>Insurance</strong>: The Multi-Tool Asset</li>
             <li><strong>Living Benefits</strong>: Use it while you're here</li>
         </ul>
-        <div class="footer-brand">MODULE 4: STRATEGIC RISK</div>
+        <div class="footer-brand">MODULE 5: STRATEGIC RISK<br/>FOR EDUCATIONAL PURPOSES ONLY</div>
     </div>
 
-    <!-- Slide 6: Closing -->
+    <!-- Slide 8: Closing -->
     <div class="slide" id="slide-5">
         <div class="subheadline">Your Move</div>
         <div class="headline">Closing the Gaps</div>
@@ -181,7 +205,7 @@
             <li>Action beats Perfection</li>
             <li>Let's Connect & Refine</li>
         </ul>
-        <div class="footer-brand">CONCLUSION & NEXT STEPS</div>
+        <div class="footer-brand">CONCLUSION & NEXT STEPS<br/>FOR EDUCATIONAL PURPOSES ONLY</div>
     </div>
 
     <div class="controls">
@@ -192,6 +216,11 @@
     </div>
 
     <script>
+        // Clean Title trick for printing
+        const originalTitle = document.title;
+        window.onbeforeprint = () => { document.title = ''; };
+        window.onafterprint = () => { document.title = originalTitle; };
+
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
 
